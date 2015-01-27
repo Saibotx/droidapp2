@@ -25,4 +25,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/device_rssi" />
 </LinearLayout><!-- From: file:/C:/Users/Saibot/AndroidStudioProjects/BT4LEDTest1/app/src/main/res/layout/listitem_device.xml -->

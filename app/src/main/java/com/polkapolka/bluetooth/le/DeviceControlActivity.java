@@ -27,6 +27,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -109,16 +110,17 @@ public class DeviceControlActivity extends Activity {
                 mBluetoothLeService.setCharacteristicNotification(characteristicRX,true);
 */
 
-
-
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
                 mConnected = false;
                 updateConnectionState(R.string.disconnected);
                 invalidateOptionsMenu();
                 clearUI();
+                SystemClock.sleep(1000);
+                finish();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
                 // Show all the supported services and characteristics on the user interface.
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
+                sendData("+ADDR:ANDROID89012");
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
                 handleData(intent.getStringExtra(mBluetoothLeService.EXTRA_DATA));
             }
@@ -235,6 +237,7 @@ public class DeviceControlActivity extends Activity {
             }
             if (data.equals("checkBack")){
                 // re-connect to this bitch in 3 seconds after round-robin checking other devices. -----------------------------------TODO
+                finish();
 
             }
 
